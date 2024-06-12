@@ -1,12 +1,18 @@
 import {sha256} from "js-sha256";
 import Payoff from "./Payoff";
 import axios from "axios";
+import Invoice from "./Invoice";
+import Shop from "./Shop";
+import Recurrent from "./Recurrent";
 
 type RequestParamsType = {[key: string]: any};
 
 class LavaBusiness {
 
     public payoff: Payoff;
+    public invoice: Invoice;
+    public shop: Shop;
+    public recurrent: Recurrent;
 
     protected projectId: string;
     protected secretKey: string;
@@ -16,9 +22,12 @@ class LavaBusiness {
         this.secretKey = secretKey;
 
         this.payoff = new Payoff(projectId, secretKey);
+        this.invoice = new Invoice(projectId, secretKey);
+        this.shop = new Shop(projectId, secretKey);
+        this.recurrent = new Recurrent(projectId, secretKey);
     }
 
-    public request = async (address: string, params: RequestParamsType = {}) => {
+    protected request = async (address: string, params: RequestParamsType = {}) => {
         const response = await axios.post(
             'https://api.lava.ru/business/' + address,
             {

@@ -33,7 +33,7 @@ class Payoff extends LavaBusiness {
      * Получение информации о выводе. Подробнее: https://dev.lava.ru/business-payoff-info
      * @param params
      */
-    public info = (params: PayoffInfoInterface) => {
+    public getInfo = (params: PayoffInfoInterface) => {
         return this.request('payoff/info', params);
     }
 
